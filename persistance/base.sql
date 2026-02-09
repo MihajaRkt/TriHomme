@@ -9,3 +9,15 @@ create table User(
     mail_User varchar(30)
 );
 
+create table Categorie(
+    id_Categorie int primary key auto_increment,
+    libelle varchar(50) 
+);
+
+create table Objet(
+    id_Objet int primary key auto_increment,
+    id_Proprietaire int references User(id_User),
+    id_Categorie int references Categorie(id_Categorie),
+    libelle varchar(50)
+);
+
