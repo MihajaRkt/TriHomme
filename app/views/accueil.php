@@ -18,7 +18,7 @@
     </header>
 
     <main>
-        <h1>Bienvenue sur notde boutique</h1>
+        <h1>Bienvenue sur notre boutique</h1>
         <section class="product-list">
 
         <p>Liste des objets </p>
@@ -29,8 +29,7 @@
             <td>libelle</td>
             <td>prix</td>
             </tr>
-            <?php var_dump($liste); ?>
-            <!-- <?php
+            <?php
             foreach($liste as $l){ ?>
             <tr>
                 <td><?= $l['id_Proprietaire'] ?></td>
@@ -39,7 +38,7 @@
                 <td><?= $l['prix'] ?></td>
             </tr>
             <?php }
-            ?> -->
+            ?>
         </table>
         <?php ?>
         </section>

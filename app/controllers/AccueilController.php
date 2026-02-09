@@ -10,6 +10,7 @@ class AccueilController {
     {
         $objetmodel = new ObjetModel(Flight::db());
         $objet = $objetmodel->getAllObjet();
-        Flight::render('accueil', ['liste', $objet]);
+        $data = ['liste'=>$objet];
+        Flight::render('accueil', $data);
     }
 }

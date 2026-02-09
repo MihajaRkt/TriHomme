@@ -16,8 +16,8 @@ class ObjetModel
 
     public function getAllObjet()
     {
-        $sql = "select * from Objet";
-        $stmt = $this->db->query($sql);
-        return $stmt->fetch();
+        $stmt = $this->db->prepare("SELECT * FROM Objet");
+        $stmt->execute();
+        return $stmt ->fetchAll(PDO::FETCH_ASSOC);
     }
 }
