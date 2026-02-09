@@ -68,7 +68,7 @@ return [
 	'database' => [
 		// MySQL Example:
 		'host'     => 'localhost:3306',      // Database host (e.g., 'localhost', 'db.example.com')
-		'dbname'   => 'takalo',   // Database name (e.g., 'flightphp')
+		'dbname'   => 'Takalo',   // Database name (e.g., 'flightphp')
 		'user'     => 'root',  // Database user (e.g., 'root')
 		'password' => '',  // Database password (never commit real passwords)
 

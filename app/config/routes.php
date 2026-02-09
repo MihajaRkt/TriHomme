@@ -4,6 +4,7 @@ use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
 use app\controllers\AuthController;
+use app\controllers\AccueilController;
 /** 
  * @var Router $router 
  * @var Engine $app
@@ -24,6 +25,8 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/login', [AuthController::class, 'showLogin']);
     $router->post('/login', [AuthController::class, 'postLogin']);
     $router->post('/validate-login', [AuthController::class, 'validateLoginAjax']);
+
+    $router->get('/accueil', [AccueilController::class, 'list']);
 
     // $message = new MessageController();
     // $router->get('/message/@id/@id1', [$message, 'charger_messages']);
