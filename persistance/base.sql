@@ -18,6 +18,11 @@ create table Objet(
     id_Objet int primary key auto_increment,
     id_Proprietaire int references User(id_User),
     id_Categorie int references Categorie(id_Categorie),
-    libelle varchar(50)
+    libelle varchar(50),
+    prix double
+);
+create table Objet_fille(
+    id_Objet int references Objet(id_Objet),
+    img varchar(100)
 );
 
