@@ -2,20 +2,32 @@
 
 namespace app\controllers;
 
-use app\models\LoginModel;
+use app\models\UserModel;
 use Flight;
 
-class LoginController
+class UserController
 {
+    
+    public function getAdmin()
+    {
+        $UserModel = new UserModel(Flight::db());
+        $admins = $UserModel->getAdmin();
+
+        Flight::render('accueil', [
+            'admins' => $admins,
+            'baseUrl' => Flight::get('flight.base_url')
+        ]);
+    }
+
     public function login()
     {
         $email = Flight::request()->data->email;
         $mdp = Flight::request()->data->mdp;
 
-        $loginModel = new LoginModel(Flight::db());
-        $user = $loginModel->verifier_user($email, $mdp);
+        $UserModel = new UserModel(Flight::db());
+        $user = $UserModel->verifier_user($email, $mdp);
 
-        Flight::render('login', [
+        Flight::render('accueil', [
             'user' => $user,
             'baseUrl' => Flight::get('flight.base_url')
         ]);
@@ -27,8 +39,8 @@ class LoginController
         $email = Flight::request()->data->email;
         $mdp = Flight::request()->data->mdp;
 
-        $loginModel = new LoginModel(Flight::db());
-        $userId = $loginModel->insert_user($username, $email, $mdp);
+        $UserModel = new UserModel(Flight::db());
+        $userId = $UserModel->insert_user($username, $email, $mdp);
 
         Flight::render('accueil', [
             'userId' => $userId,
