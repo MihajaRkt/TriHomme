@@ -14,15 +14,8 @@ use app\controllers\MessageController;
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function (Router $router) use ($app) {
 
-
-    $pageController = new PageController();
-    // $router->get('/', [$pageController, 'redirectIndex']);
-    $router->get('/index', [$pageController, 'redirectIndex']);
-
-    $router->get('/users', [$pageController, 'users']);
-
-    $message = new MessageController();
-    $router->get('/message/@id/@id1', [$message, 'charger_messages']);
-    $router->post('/insertMessage', [$message, 'send_message']);
+    $loginController = new LoginController();
+    $router->post('/login', [$loginController, 'login']);
+    $router->post('/register', [$loginController, 'register']);
 
 }, [SecurityHeadersMiddleware::class]);
