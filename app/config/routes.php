@@ -20,6 +20,6 @@ $router->group('', function (Router $router) use ($app) {
     $router-> get('/login', [$userController, 'login']);
     $router-> post('/register', [$userController, 'register']);
     $router-> get('/accueil', [AccueilController::class, 'list']);
-
+    
 
 }, [SecurityHeadersMiddleware::class]);
