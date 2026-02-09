@@ -13,7 +13,7 @@ class UserController
         $UserModel = new UserModel(Flight::db());
         $admins = $UserModel->getAdmin();
 
-        Flight::render('accueil', [
+        Flight::render('login', [
             'admins' => $admins,
             'baseUrl' => Flight::get('flight.base_url')
         ]);

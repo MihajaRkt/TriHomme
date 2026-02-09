@@ -1,5 +1,4 @@
 <?php
-
 namespace app\services;
 
 use app\models\UserModel;
@@ -10,16 +9,9 @@ class UserService {
 
   public function register(array $values, $plainPassword) {
     $hash = password_hash((string)$plainPassword, PASSWORD_DEFAULT);
-    return $this->repo->create(
-      $values['nom'], $values['mail'], $hash
+    $id = $this->repo->insert_user(
+      $values['nom'], $values['email'], $hash
     );
-  }
-
-  public function login($mail, $plainPassword) {
-    $user = $this->repo->findByMail($mail);
-    if (!$user || !password_verify($plainPassword, $user['pwd_User'])) {
-      return null;
-    }
-    return $user;
+    return $this->repo->getUserById($id);
   }
 }

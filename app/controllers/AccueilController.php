@@ -3,14 +3,25 @@
 namespace app\controllers;
 
 use app\models\ObjetModel;
+use app\models\UserModel;
 use Flight;
 
 class AccueilController {
     public function list()
     {
-        $objetmodel = new ObjetModel(Flight::db());
+        $pdo = Flight::db();
+        $objetmodel = new ObjetModel($pdo);
+        $usermodel = new UserModel($pdo);
+
         $objet = $objetmodel->getAllObjet();
-        $data = ['liste'=>$objet];
-        Flight::render('accueil', $data);
+        $users = $usermodel->getAllUsers();
+        $currentUser = $_SESSION['user'] ?? null;
+
+        Flight::render('accueil', [
+            'liste' => $objet,
+            'users' => $users,
+            'currentUser' => $currentUser,
+            'baseUrl' => Flight::get('flight.base_url'),
+        ]);
     }
 }

@@ -1,3 +1,4 @@
+-- Active: 1769621502980@@127.0.0.1@3306@Takalo
 create database Takalo;
 
 use Takalo;

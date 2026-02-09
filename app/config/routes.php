@@ -3,23 +3,36 @@
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
+
+use app\controllers\UserController;
+use app\controllers\AccueilController;
+use app\controllers\AuthController;
+
 /** 
  * @var Router $router 
  * @var Engine $app
  */
 
-// Route par défaut redirige vers login
-
 // This wraps all routes in the group with the SecurityHeadersMiddleware
 $router->group('', function (Router $router) use ($app) {
 
-    $router-> get('/', Flight::render('/index', ['baseUrl' => Flight::get('flight.base_url')]));
+    $auth = new AuthController();
+
+    $router->get('/', [$auth, 'showLogin']);
+    $router->post('/login', [$auth, 'postLogin']);
+    $router->post('/validate-login', [$auth, 'validateLoginAjax']);
+    $router->get('/logout', [$auth, 'logout']);
+
+    $router->get('/register', [$auth, 'showRegister']);
+    $router->post('/register', [$auth, 'postRegister']);
+    $router->post('/validate-register', [$auth, 'validateRegisterAjax']);
+
+    $router->post('/api/validate/register', [$auth, 'validateRegisterAjax']);
 
     $userController = new UserController();
-    $router-> get('/', [$userController, 'getAdmin']);
-    $router-> get('/login', [$userController, 'login']);
-    $router-> post('/register', [$userController, 'register']);
-    $router-> get('/accueil', [AccueilController::class, 'list']);
-    
+    $router->get('/admin', [$userController, 'getAdmin']);
+
+    $accueil = new AccueilController();
+    $router->get('/accueil', [$accueil, 'list']);
 
 }, [SecurityHeadersMiddleware::class]);

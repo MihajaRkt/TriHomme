@@ -16,13 +16,14 @@ class UserModel
 
     public function verifier_user($email, $mdp)
     {
-        $sql = "select * from User where mail_User=:email and pwd_User=:mdp";
+        $sql = "SELECT * FROM User WHERE mail_User = :email";
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([
-            ':email' => $email,
-            ':mdp' => $mdp
-        ]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->execute([':email' => $email]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($user && password_verify($mdp, $user['pwd_User'])) {
+            return $user;
+        }
+        return false;
     }
 
     public function insert_user($username, $email, $mdp)
@@ -35,6 +36,22 @@ class UserModel
             ':mdp' => $mdp
         ]);
         return $this->db->lastInsertId();
+    }
+
+    public function getUserById($id)
+    {
+        $sql = "SELECT * FROM User WHERE id_User = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function getAllUsers()
+    {
+        $sql = "SELECT id_User, nom_User, mail_User, isAdmin FROM User";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAdmin()

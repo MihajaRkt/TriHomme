@@ -21,14 +21,14 @@ class Validator
   {
     $errors = [
       'nom' => '',
-      'mail' => '',
+      'email' => '',
       'password' => '',
       'confirm_password' => '',
     ];
 
     $values = [
       'nom' => trim((string)($input['nom'] ?? '')),
-      'mail' => trim((string)($input['mail'] ?? '')),
+      'email' => trim((string)($input['email'] ?? '')),
     ];
 
     $password = (string)($input['password'] ?? '');
@@ -36,9 +36,9 @@ class Validator
 
     if (mb_strlen($values['nom']) < 2) $errors['nom'] = "Le nom doit contenir au moins 2 caractères.";
 
-    if ($values['mail'] === '') $errors['mail'] = "L'email est obligatoire.";
-    elseif (!filter_var($values['mail'], FILTER_VALIDATE_EMAIL))
-      $errors['mail'] = "L'email n'est pas valide (ex: nom@domaine.com).";
+    if ($values['email'] === '') $errors['email'] = "L'email est obligatoire.";
+    elseif (!filter_var($values['email'], FILTER_VALIDATE_EMAIL))
+      $errors['email'] = "L'email n'est pas valide (ex: nom@domaine.com).";
 
     if (strlen($password) < 8) $errors['password'] = "Le mot de passe doit contenir au moins 8 caractères.";
 
@@ -48,38 +48,9 @@ class Validator
       if ($errors['password'] === '') $errors['password'] = "Vérifiez le mot de passe et sa confirmation.";
     }
 
-    if ($repo && $errors['mail'] === '' && $repo->mailExists($values['mail'])) {
-      $errors['mail'] = "Cet email est déjà utilisé.";
-    }
-
-    $ok = true;
-    foreach ($errors as $m) {
-      if ($m !== '') {
-        $ok = false;
-        break;
-      }
-    }
-
-    return ['ok' => $ok, 'errors' => $errors, 'values' => $values];
-  }
-
-  public static function validateLogin(array $input)
-  {
-    $errors = [
-      'mail' => '',
-      'password' => ''
-    ];
-
-    $values = [
-      'mail' => trim((string)($input['mail'] ?? '')),
-      'password' => (string)($input['password'] ?? ''),
-    ];
-
-    if ($values['mail'] === '') $errors['mail'] = "L'email est obligatoire.";
-    elseif (!filter_var($values['mail'], FILTER_VALIDATE_EMAIL))
-      $errors['mail'] = "L'email n'est pas valide.";
-
-    if (strlen($values['password']) < 1) $errors['password'] = "Le mot de passe est obligatoire.";
+    // if ($repo && $errors['email'] === '' && $repo->emailExists($values['email'])) {
+    //   $errors['email'] = "Cet email est déjà utilisé.";
+    // }
 
     $ok = true;
     foreach ($errors as $m) {

@@ -38,29 +38,35 @@
 </div>
 <script src="/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-document.getElementById('registerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('/validate-register', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Mettre à jour les erreurs
-        document.querySelectorAll('.text-danger').forEach(el => el.textContent = '');
-        if (!data.ok) {
-            for (const [field, error] of Object.entries(data.errors)) {
-                const errorEl = document.querySelector(`[name=${field}]`).nextElementSibling;
-                if (errorEl && errorEl.classList.contains('text-danger')) {
-                    errorEl.textContent = error;
+const regForm = document.getElementById('registerForm');
+if (regForm) {
+    regForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        fetch('/validate-register', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Mettre à jour les erreurs
+            document.querySelectorAll('.text-danger').forEach(el => el.textContent = '');
+            if (!data.ok) {
+                for (const [field, error] of Object.entries(data.errors)) {
+                    const fieldEl = document.querySelector(`[name="${field}"]`);
+                    if (!fieldEl) continue;
+                    let errorEl = fieldEl.nextElementSibling;
+                    while (errorEl && !(errorEl.classList && errorEl.classList.contains('text-danger'))) {
+                        errorEl = errorEl.nextElementSibling;
+                    }
+                    if (errorEl) errorEl.textContent = error;
                 }
+            } else {
+                this.submit();
             }
-        } else {
-            this.submit();
-        }
+        }).catch(err => console.error(err));
     });
-});
+}
 </script>
 </body>
 </html>
