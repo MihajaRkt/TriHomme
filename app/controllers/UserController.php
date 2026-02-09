@@ -15,11 +15,10 @@ class LoginController
         $loginModel = new LoginModel(Flight::db());
         $user = $loginModel->verifier_user($email, $mdp);
 
-        if ($user) {
-            Flight::json(['success' => true, 'user' => $user]);
-        } else {
-            Flight::json(['success' => false, 'message' => 'Invalid email or password']);
-        }
+        Flight::render('login', [
+            'user' => $user,
+            'baseUrl' => Flight::get('flight.base_url')
+        ]);
     }
 
     public function register()

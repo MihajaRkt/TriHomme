@@ -5,35 +5,35 @@ namespace app\models;
 use Flight;
 use PDO;
 
-class UserModel
+class LoginModel
 {
-  private $pdo;
-  public function __construct(PDO $pdo)
-  {
-    $this->pdo = $pdo;
-  }
+    private $db;
 
-  public function mailExists($mail)
-  {
-    $st = $this->pdo->prepare("SELECT 1 FROM User WHERE mail_User=? LIMIT 1");
-    $st->execute([(string)$mail]);
-    return (bool)$st->fetchColumn();
-  }
+    public function __construct($db)
+    {
+        $this->db = $db;
+    }
 
-  public function create($nom, $mail, $hash)
-  {
-    $st = $this->pdo->prepare("
-      INSERT INTO User(nom_User, mail_User, pwd_User)
-      VALUES(?,?,?)
-    ");
-    $st->execute([(string)$nom, (string)$mail, (string)$hash]);
-    return $this->pdo->lastInsertId();
-  }
+    public function verifier_user($email, $mdp)
+    {
+        $sql = "select * from Users where email=:email and mdp=:mdp";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':email' => $email,
+            ':mdp' => $mdp
+        ]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
-  public function findByMail($mail)
-  {
-    $st = $this->pdo->prepare("SELECT id_User, nom_User, mail_User, pwd_User FROM User WHERE mail_User=? LIMIT 1");
-    $st->execute([(string)$mail]);
-    return $st->fetch(PDO::FETCH_ASSOC);
-  }
+    public function insert_user($username, $email, $mdp)
+    {
+        $sql = "INSERT INTO Users (username, email, mdp) VALUES (:username, :email, :mdp)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([
+            ':username' => $username,
+            ':email' => $email,
+            ':mdp' => $mdp
+        ]);
+        return $this->db->lastInsertId();
+    }
 }
