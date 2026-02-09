@@ -1,6 +1,8 @@
 <?php
 namespace app\services;
 
+use app\models\UserModel;
+
 class Validator
 {
 
@@ -15,7 +17,7 @@ class Validator
     return  preg_match($expReguliere, $numero);
   }
 
-  public static function validateRegister(array $input, UserRepository $repo = null)
+  public static function validateRegister(array $input, UserModel $repo = null)
   {
     $errors = [
       'nom' => '',
@@ -59,6 +61,35 @@ class Validator
     if ($repo && $errors['email'] === '' && $repo->emailExists($values['email'])) {
       $errors['email'] = "Cet email est déjà utilisé.";
     }
+
+    $ok = true;
+    foreach ($errors as $m) {
+      if ($m !== '') {
+        $ok = false;
+        break;
+      }
+    }
+
+    return ['ok' => $ok, 'errors' => $errors, 'values' => $values];
+  }
+
+  public static function validateLogin(array $input)
+  {
+    $errors = [
+      'email' => '',
+      'password' => ''
+    ];
+
+    $values = [
+      'email' => trim((string)($input['email'] ?? '')),
+      'password' => (string)($input['password'] ?? ''),
+    ];
+
+    if ($values['email'] === '') $errors['email'] = "L'email est obligatoire.";
+    elseif (!filter_var($values['email'], FILTER_VALIDATE_EMAIL))
+      $errors['email'] = "L'email n'est pas valide.";
+
+    if (strlen($values['password']) < 1) $errors['password'] = "Le mot de passe est obligatoire.";
 
     $ok = true;
     foreach ($errors as $m) {

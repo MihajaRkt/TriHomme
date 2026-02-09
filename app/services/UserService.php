@@ -14,4 +14,12 @@ class UserService {
       $values['nom'], $values['prenom'], $values['email'], $hash, $values['telephone']
     );
   }
+
+  public function login($email, $plainPassword) {
+    $user = $this->repo->findByEmail($email);
+    if (!$user || !password_verify($plainPassword, $user['password_hash'])) {
+      return null;
+    }
+    return $user;
+  }
 }

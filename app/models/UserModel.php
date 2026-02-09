@@ -29,4 +29,11 @@ class UserModel
     $st->execute([(string)$nom, (string)$prenom, (string)$email, (string)$hash, (string)$telephone]);
     return $this->pdo->lastInsertId();
   }
+
+  public function findByEmail($email)
+  {
+    $st = $this->pdo->prepare("SELECT id, nom, prenom, email, password_hash, telephone FROM users WHERE email=? LIMIT 1");
+    $st->execute([(string)$email]);
+    return $st->fetch(PDO::FETCH_ASSOC);
+  }
 }
