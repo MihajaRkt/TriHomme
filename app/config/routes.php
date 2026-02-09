@@ -6,7 +6,6 @@ use flight\net\Router;
 use app\controllers\PageController;
 use app\controllers\UserController;
 use app\controllers\MessageController;
-use app\controllers\AuthController;
 /** 
  * @var Router $router 
  * @var Engine $app
@@ -16,16 +15,14 @@ use app\controllers\AuthController;
 $router->group('', function (Router $router) use ($app) {
 
 
-    // $router->get('/register', [AuthController::class, 'showRegister']);
-    // $router->post('/register', [AuthController::class, 'postRegister']);
-    // $router->post('/validate-register', [AuthController::class, 'validateRegisterAjax']);
+    $pageController = new PageController();
+    // $router->get('/', [$pageController, 'redirectIndex']);
+    $router->get('/index', [$pageController, 'redirectIndex']);
 
-    // $router->get('/login', [AuthController::class, 'showLogin']);
-    // $router->post('/login', [AuthController::class, 'postLogin']);
-    // $router->post('/validate-login', [AuthController::class, 'validateLoginAjax']);
+    $router->get('/users', [$pageController, 'users']);
 
-    // $message = new MessageController();
-    // $router->get('/message/@id/@id1', [$message, 'charger_messages']);
-    // $router->post('/insertMessage', [$message, 'send_message']);
+    $message = new MessageController();
+    $router->get('/message/@id/@id1', [$message, 'charger_messages']);
+    $router->post('/insertMessage', [$message, 'send_message']);
 
 }, [SecurityHeadersMiddleware::class]);
