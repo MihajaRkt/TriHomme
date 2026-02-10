@@ -101,12 +101,12 @@ ob_start();
                                         </td>
                                         <td class="text-center">
                                             <div class="btn-group btn-group-sm">
-                                                <a href="<?= $baseUrl ?>/editCategorie/<?= $categorie['id_categorie'] ?? 0 ?>" class="btn btn-outline-primary" title="Modifier">
+                                                <a href="<?= $baseUrl ?>/editCategorie/<?= $categorie['id_categorie'] ?>" class="btn btn-outline-primary" title="Modifier">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-outline-danger" title="Supprimer" onclick="confirmerSuppression(<?= $categorie['id'] ?? 0 ?>, '<?= htmlspecialchars($categorie['nom'] ?? '', ENT_QUOTES) ?>')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
+                                                <a href="<?= $baseUrl ?>/supprimerCategorie/<?= $categorie['id_categorie'] ?>" class="btn btn-outline-danger" title="Supprimer">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
@@ -135,10 +135,3 @@ $content = ob_get_clean();
 include __DIR__ . '/layout.php';
 ?>
 
-<script nonce="<?= Flight::get('csp_nonce') ?>">
-function confirmerSuppression(id, nom) {
-  if (confirm('Êtes-vous sûr de vouloir supprimer la catégorie "' + nom + '" ?')) {
-    window.location.href = '<?= $baseUrl ?>/supprimerCategorie/' + id;
-  }
-}
-</script>
