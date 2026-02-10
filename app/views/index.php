@@ -1,38 +1,66 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title>
-    <link href="<?= $baseUrl ?>/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <script src="<?= $baseUrl ?>/assets/bootstrap/js/validation-ajax.js" defer nonce="<?= Flight::get('csp_nonce') ?>"></script>
-</head>
-
-<body>
-    <div class="container mt-5">
-        <h1>Connexion</h1>
-        <?php if ($errors['_global']): ?>
-            <div class="alert alert-danger"><?= $errors['_global'] ?></div>
+<?php
+if (!isset($baseUrl)) { $baseUrl = Flight::get('flight.base_url'); }
+if (!isset($page_title)) { $page_title = 'Connexion - TriHomme'; }
+ob_start();
+?>
+<div class="row justify-content-center">
+  <div class="col-lg-5 col-md-7">
+    <div class="card-modern">
+      <div class="card-header-custom text-center">
+        <h1 class="h3 mb-0">
+          <i class="fas fa-sign-in-alt me-2 text-primary"></i>
+          Bienvenue sur TriHomme
+        </h1>
+        <p class="text-muted mb-0 mt-2">Connectez-vous pour accéder à votre espace</p>
+      </div>
+      <div class="card-body p-4">
+        <?php if (!empty($errors['_global'])): ?>
+          <div class="alert alert-danger alert-modern">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <?= $errors['_global'] ?>
+          </div>
         <?php endif; ?>
+        
         <form id="loginForm" action="<?= $baseUrl ?>/login" method="post" data-validate="true" data-validate-url="<?= $baseUrl ?>/validate-login">
-            <div class="mb-3">
-                <label for="mail" class="form-label">Email</label>
-                <input type="email" class="form-control" id="mail" name="mail" value="<?= htmlspecialchars($values['mail'] ?: ($admin['mail_User'] ?? '')) ?>">
-                <?php if ($errors['mail']): ?>
-                    <div class="text-danger"><?= $errors['mail'] ?></div><?php endif; ?>
+          <div class="mb-4">
+            <label for="mail" class="form-label fw-semibold">
+              <i class="fas fa-envelope me-2 text-muted"></i>Adresse email
+            </label>
+            <input type="email" class="form-control form-control-modern" id="mail" name="mail" 
+                   placeholder="votre@email.com"
+                   value="<?= htmlspecialchars($values['mail'] ?: ($admin['mail_User'] ?? '')) ?>">
+            <?php if (!empty($errors['mail'])): ?>
+              <div class="text-danger mt-2"><small><?= $errors['mail'] ?></small></div>
+            <?php endif; ?>
+          </div>
+          
+          <div class="mb-4">
+            <label for="password" class="form-label fw-semibold">
+              <i class="fas fa-lock me-2 text-muted"></i>Mot de passe
+            </label>
+            <input type="password" class="form-control form-control-modern" id="password" name="password" 
+                   placeholder="Votre mot de passe">
+            <?php if (!empty($errors['password'])): ?>
+              <div class="text-danger mt-2"><small><?= $errors['password'] ?></small></div>
+            <?php endif; ?>
+          </div>
+          
+          <div class="d-grid gap-3">
+            <button type="submit" class="btn btn-custom btn-lg">
+              <i class="fas fa-sign-in-alt me-2"></i>
+              Se connecter
+            </button>
+            
+            <div class="text-center">
+              <span class="text-muted">Pas encore de compte ?</span>
+              <a href="<?= $baseUrl ?>/register" class="text-primary text-decoration-none fw-semibold ms-1">
+                Créer un compte
+              </a>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="password" name="password">
-                <?php if ($errors['password']): ?>
-                    <div class="text-danger"><?= $errors['password'] ?></div><?php endif; ?>
-            </div>
-            <button type="submit" class="btn btn-primary">Se connecter</button>
-        </form>
-        <a href="<?= $baseUrl ?>/register" class="btn btn-link">S'inscrire</a>
-
+          </div>
+        </div>
     </div>
-    <script src="<?= $baseUrl ?>/assets/bootstrap/js/bootstrap.bundle.min.js" nonce="<?= Flight::get('csp_nonce') ?>"></script>
-</body>
-
-</html>
+</div>
+<?php
+$content = ob_get_clean();
+include __DIR__ . '/layout.php';

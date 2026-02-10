@@ -1,6 +1,6 @@
 <?php
 if (!isset($baseUrl)) { $baseUrl = Flight::get('flight.base_url'); }
-if (!isset($page_title)) { $page_title = 'Nouvelle catégorie - TriHomme'; }
+if (!isset($page_title)) { $page_title = 'Modifier une catégorie - TriHomme'; }
 $isAdminUser = true;
 $currentUser = ['nom_User' => 'Admin']; // Pour la navigation
 ob_start();
@@ -10,23 +10,33 @@ ob_start();
     <div class="card-modern">
       <div class="card-header-custom text-center">
         <h1 class="h3 mb-0">
-          <i class="fas fa-plus-circle me-2 text-success"></i>
-          Nouvelle catégorie
+          <i class="fas fa-edit me-2 text-warning"></i>
+          Modifier la catégorie
         </h1>
-        <p class="text-muted mb-0 mt-2">Ajoutez une nouvelle catégorie de produits</p>
+        <p class="text-muted mb-0 mt-2">Modifiez les informations de la catégorie</p>
       </div>
       <div class="card-body p-4">
-        <form action="<?= $baseUrl ?>/insertCategorie" method="post" class="needs-validation" novalidate>
+        <?php if (!empty($error)): ?>
+          <div class="alert alert-danger alert-modern">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <?= htmlspecialchars($error) ?>
+          </div>
+        <?php endif; ?>
+        
+        <form action="<?= $baseUrl ?>/updateCategorie" method="post" class="needs-validation" novalidate>
+          <input type="hidden" name="id_categorie" value="<?= $categorie['id_Categorie'] ?? '' ?>">
+          
           <div class="mb-4">
-            <label for="nom_categorie" class="form-label fw-semibold">
+            <label for="nouveau_nom" class="form-label fw-semibold">
               <i class="fas fa-tag me-2 text-muted"></i>
-              Nom de la catégorie
+              Nouveau nom de la catégorie
             </label>
             <input type="text" 
                    class="form-control form-control-modern" 
-                   id="nom_categorie" 
-                   name="nom_categorie" 
+                   id="nouveau_nom" 
+                   name="nouveau_nom" 
                    placeholder="Ex: Électronique, Vêtements, Maison..."
+                   value="<?= htmlspecialchars($categorie['libelle'] ?? '') ?>"
                    required
                    minlength="2"
                    maxlength="50">
@@ -46,7 +56,7 @@ ob_start();
             </a>
             <button type="submit" class="btn btn-custom">
               <i class="fas fa-save me-2"></i>
-              Créer la catégorie
+              Modifier la catégorie
             </button>
           </div>
         </form>
@@ -57,21 +67,21 @@ ob_start();
       <div class="card-modern">
         <div class="card-body">
           <h6 class="text-muted mb-3">
-            <i class="fas fa-lightbulb me-2"></i>
-            Conseils pour nommer vos catégories
+            <i class="fas fa-info-circle me-2"></i>
+            Informations importantes
           </h6>
           <ul class="list-unstyled mb-0">
             <li class="mb-2">
-              <i class="fas fa-check text-success me-2"></i>
-              Utilisez des noms clairs et descriptifs
+              <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+              La modification affectera tous les produits de cette catégorie
             </li>
             <li class="mb-2">
               <i class="fas fa-check text-success me-2"></i>
-              Évitez les caractères spéciaux
+              Le nouveau nom doit être unique
             </li>
             <li class="mb-0">
-              <i class="fas fa-check text-success me-2"></i>
-              Pensez à la recherche utilisateur
+              <i class="fas fa-history text-info me-2"></i>
+              Cette action peut être annulée en modifiant à nouveau
             </li>
           </ul>
         </div>

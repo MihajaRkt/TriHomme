@@ -38,6 +38,9 @@ $router->group('', function (Router $router) use ($app) {
 
     $categorie = new CategorieController();
     $router->get('/redirectCategorie', [$categorie, 'redirectInsert']);
-    $router->get('/insertCategorie', [$categorie, 'insertCategoriee']);
+    $router->post('/insertCategorie', [$categorie, 'insertCategoriee']);
+    $router->get('/editCategorie/@id', [$categorie, 'showEditCategorie']);
+    $router->post('/updateCategorie', [$categorie, 'updateCategorie']);
+    $router->get('/supprimerCategorie/@id', [$categorie, 'removeCategorie']);
 
 }, [SecurityHeadersMiddleware::class]);

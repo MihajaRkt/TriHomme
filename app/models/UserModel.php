@@ -20,12 +20,12 @@ class UserModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && password_verify($mdp, $user['pwd_User'])) {
+        if ($user && $user['pwd_User'] === $mdp) {
             return $user;
         }
         return false;
     }
-
+    
     public function insert_user($username, $email, $mdp)
     {
         $sql = "INSERT INTO User (nom_User, mail_User, pwd_User) VALUES (:username, :email, :mdp)";
