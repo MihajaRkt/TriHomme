@@ -38,6 +38,6 @@ $router->group('', function (Router $router) use ($app) {
 
     $categorie = new CategorieController();
     $router->get('/redirectCategorie', [$categorie, 'redirectInsert']);
-    $router->get('create-categorie', [$categorie, 'insertCategorie']);
+    $router->get('/insertCategorie', [$categorie, 'insertCategoriee']);
 
 }, [SecurityHeadersMiddleware::class]);

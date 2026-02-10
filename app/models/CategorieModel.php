@@ -21,4 +21,7 @@ class CategorieModel
         return $stmt ->fetchAll(PDO::FETCH_ASSOC);
     }
     
+    public function saveCategorie($data) {
+        
+    }
 }
