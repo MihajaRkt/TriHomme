@@ -7,6 +7,7 @@ use flight\net\Router;
 use app\controllers\UserController;
 use app\controllers\AccueilController;
 use app\controllers\AuthController;
+use app\controllers\CategorieController;
 
 /** 
  * @var Router $router 
@@ -33,6 +34,10 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/admin', [$userController, 'getAdmin']);
 
     $accueil = new AccueilController();
-    $router->get('/accueil', [$accueil, 'list']);
+    $router->get('/accueil/@id', [$accueil, 'list']);
+
+    $categorie = new CategorieController();
+    $router->get('/redirectCategorie', [$categorie, 'redirectInsert']);
+    $router->get('create-categorie', [$categorie, 'insertCategorie']);
 
 }, [SecurityHeadersMiddleware::class]);

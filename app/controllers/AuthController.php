@@ -57,7 +57,8 @@ class AuthController
 
       if ($user) {
         $_SESSION['user'] = $user;
-        Flight::redirect('/accueil');
+        $id_user = $user['id_User'];
+        Flight::redirect('/accueil/' . $id_user);
       } else {
         Flight::render('index', [
           'values' => ['mail' => $email],
@@ -204,7 +205,12 @@ class AuthController
       $svc = new UserService(new UserModel($pdo));
       $user = $svc->register($res['values'], (string)$input['password']);
       $_SESSION['user'] = $user;
-      Flight::redirect('/accueil');
+      $id_user = $user['id_User'] ?? null;
+      if ($id_user) {
+        Flight::redirect('/accueil/' . $id_user);
+      } else {
+        Flight::redirect('/accueil');
+      }
       return;
     }
 
