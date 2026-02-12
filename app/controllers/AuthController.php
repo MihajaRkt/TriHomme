@@ -224,7 +224,7 @@ class AuthController
 
   public static function logout()
   {
-    session_destroy();
+    // session_destroy();
     Flight::redirect('/');
   }
 }
