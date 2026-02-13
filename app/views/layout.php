@@ -242,7 +242,10 @@ $isAdmin = !empty($isAdminUser ?? false);
                   </a></li>
                 <?php if (!$isAdmin): ?>
                   <li><a class="dropdown-item" href="<?= $baseUrl ?>/gestionobjet/<?= $currentUser['id_User'] ?>">
-                      <i class="fas fa-sign-out-alt"></i> Mes objets
+                      <i class="fas fa-box"></i> Mes objets
+                    </a></li>
+                  <li><a class="dropdown-item" href="<?= $baseUrl ?>/utilisateurs/<?= $currentUser['id_User'] ?>">
+                      <i class="fas fa-users"></i> Utilisateurs
                     </a></li>
                 <?php endif; ?>
               </ul>

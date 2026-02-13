@@ -33,6 +33,7 @@ $router->group('', function (Router $router) use ($app) {
 
     $userController = new UserController();
     $router->get('/admin', [$userController, 'getAdmin']);
+    $router->get('/utilisateurs/@id', [$userController, 'listUsers']);
 
     $accueil = new AccueilController();
     $router->get('/accueil/@id', [$accueil, 'list']);

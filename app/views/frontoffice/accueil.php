@@ -130,45 +130,6 @@ ob_start();
     </div>
   </div>
 </div>
-<?php endif; ?>
-
-<?php if (!empty($users)): ?>
-<div class="row mt-4">
-  <div class="col-12">
-    <div class="card-modern">
-      <div class="card-header-custom">
-        <h6 class="mb-0">
-          <i class="fas fa-users me-2"></i>
-          Communauté Takalo-Takalo
-        </h6>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <?php foreach (array_slice($users, 0, 6) as $user): ?>
-            <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-3">
-              <div class="text-center">
-                <div class="bg-gradient-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-2" 
-                     style="width: 50px; height: 50px;">
-                  <i class="fas fa-user text-white"></i>
-                </div>
-
-                <a href="<?= htmlspecialchars($baseUrl . '/profil/' . $user['id_User']) ?>" class="small fw-semibold d-block">
-                  <?= htmlspecialchars($user['nom_User']) ?>
-                </a>
-                
-                <?php if (!empty($user['isAdmin'])): ?>
-                  <span class="badge bg-warning text-dark">Admin</span>
-                <?php endif; ?>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<?php endif; ?>
-
-<?php
+<?php endif; 
 $content = ob_get_clean();
 include __DIR__ . '/../layout.php';

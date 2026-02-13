@@ -7,7 +7,7 @@ use Flight;
 
 class UserController
 {
-    
+
     public function getAdmin()
     {
         $UserModel = new UserModel(Flight::db());
@@ -15,6 +15,19 @@ class UserController
 
         Flight::render('login', [
             'admins' => $admins,
+            'baseUrl' => Flight::get('flight.base_url')
+        ]);
+    }
+
+    public function listUsers($iduser)
+    {
+        $UserModel = new UserModel(Flight::db());
+        $users = $UserModel->getUsersExceptCurrent($iduser);
+
+        $user = $UserModel->getUserById($iduser);
+        Flight::render('frontoffice/utilisateurs', [
+            'users' => $users,
+            'currentUser' => $user,
             'baseUrl' => Flight::get('flight.base_url')
         ]);
     }
