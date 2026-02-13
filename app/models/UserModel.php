@@ -49,9 +49,17 @@ class UserModel
 
     public function getAllUsers()
     {
-        $sql = "SELECT id_User, nom_User, mail_User, isAdmin FROM User";
+        $sql = "SELECT * FROM User";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getUsersExceptCurrent($id)
+    {
+        $sql = "SELECT * FROM User WHERE id_User != :currentId";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([':currentId' => $id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
