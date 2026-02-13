@@ -6,6 +6,6 @@ create or replace table Echanges(
     idObjetEnvoyeur int REFERENCES Objet(id_Objet),
     idObjetReceveur int REFERENCES Objet(id_Objet),
     Statut boolean,                              
-    date Date
+    date_creation Date
 );
 

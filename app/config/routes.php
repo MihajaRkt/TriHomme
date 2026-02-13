@@ -52,8 +52,15 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/ficheproduit/@id', [$gestionobjet, 'afficherFicheObjet']);
     $router->get('/addobjet', [$gestionobjet, 'afficherFormulaireAdd']);
 
-    $echange= new EchangeController;
+    $echange= new EchangeController();
     $router->get('/echange/@idEnvoyeur/@idReceveur/@idObjetEchange', [$echange, 'proposerEchange']);
     
 
+    $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
+
+    $router->get('/demandes/@id', [$echange, 'listeDemande']);
+    $router->get('/accepter-echange/@id', [$echange, 'accept']);
+    $router->get('/refuser-echange/@id', [$echange, 'reject']);
+
+    
 }, [SecurityHeadersMiddleware::class]);

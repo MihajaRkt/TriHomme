@@ -119,21 +119,21 @@ ob_start();
     </div>
   </div>
 <?php else: ?>
-<div class="row">
-  <div class="col-12">
-    <div class="card-modern">
-      <div class="card-body text-center p-5">
-        <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
-        <h4 class="text-muted mb-3">Aucun produit disponible</h4>
-        <p class="text-muted mb-4">Notre catalogue sera bientôt rempli de produits exceptionnels.</p>
-        <button class="btn btn-custom">
-          <i class="fas fa-bell me-2"></i>
-          Me notifier des nouveautés
-        </button>
+  <div class="row">
+    <div class="col-12">
+      <div class="card-modern">
+        <div class="card-body text-center p-5">
+          <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+          <h4 class="text-muted mb-3">Aucun produit disponible</h4>
+          <p class="text-muted mb-4">Notre catalogue sera bientôt rempli de produits exceptionnels.</p>
+          <button class="btn btn-custom">
+            <i class="fas fa-bell me-2"></i>
+            Me notifier des nouveautés
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<?php endif; 
+<?php endif;
 $content = ob_get_clean();
 include __DIR__ . '/../layout.php';

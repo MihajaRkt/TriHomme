@@ -247,6 +247,9 @@ $isAdmin = !empty($isAdminUser ?? false);
                   <li><a class="dropdown-item" href="<?= $baseUrl ?>/utilisateurs/<?= $currentUser['id_User'] ?>">
                       <i class="fas fa-users"></i> Utilisateurs
                     </a></li>
+                  <li><a class="dropdown-item" href="<?= $baseUrl ?>/demandes/<?= $currentUser['id_User'] ?>">
+                      <i class="fas fa-demandes"></i> Demandes
+                    </a></li>
                 <?php endif; ?>
               </ul>
             </div>
