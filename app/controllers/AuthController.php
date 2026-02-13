@@ -100,7 +100,7 @@ class AuthController
     header('Content-Type: application/json; charset=utf-8');
 
     try {
-      $pdo  = Flight::db();
+      $pdo = Flight::db();
 
       $req = Flight::request();
 
@@ -188,7 +188,7 @@ class AuthController
 
   public static function postRegister()
   {
-    $pdo  = Flight::db();
+    $pdo = Flight::db();
 
     $req = Flight::request();
 
@@ -203,7 +203,7 @@ class AuthController
 
     if ($res['ok']) {
       $svc = new UserService(new UserModel($pdo));
-      $user = $svc->register($res['values'], (string)$input['password']);
+      $user = $svc->register($res['values'], (string) $input['password']);
       $_SESSION['user'] = $user;
       $id_user = $user['id_User'] ?? null;
       if ($id_user) {

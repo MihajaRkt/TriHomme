@@ -35,7 +35,7 @@ class AccueilController
                     'baseUrl' => Flight::get('flight.base_url'),
                 ]);
             } else {
-                Flight::render('accueil', [
+                Flight::render('frontoffice/accueil', [
                     'currentUser' => $user,
                     'liste' => $objet,
                     'users' => $users,
@@ -43,7 +43,7 @@ class AccueilController
                 ]);
             }
         } else {
-            Flight::render('accueil', [
+            Flight::render('frontoffice/accueil', [
                 'currentUser' => $user,
                 'liste' => $objet,
                 'users' => $users,
