@@ -8,6 +8,7 @@ use app\controllers\UserController;
 use app\controllers\AccueilController;
 use app\controllers\AuthController;
 use app\controllers\CategorieController;
+use app\controllers\GestionObjetController;
 
 /** 
  * @var Router $router 
@@ -42,5 +43,8 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/editCategorie/@id', [$categorie, 'showEditCategorie']);
     $router->post('/updateCategorie', [$categorie, 'updateCategorie']);
     $router->get('/supprimerCategorie/@id', [$categorie, 'removeCategorie']);
+
+    $gestionobjet = new GestionObjetController();
+    $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
 
 }, [SecurityHeadersMiddleware::class]);

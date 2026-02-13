@@ -227,6 +227,9 @@ $isAdmin = !empty($isAdminUser ?? false);
                 <li><a class="dropdown-item" href="<?= $baseUrl ?>/logout">
                   <i class="fas fa-sign-out-alt"></i> Déconnexion
                 </a></li>
+                <li><a class="dropdown-item" href="<?= $baseUrl ?>/gestionobjet/<?= $currentUser['id_User'] ?>">
+                  <i class="fas fa-sign-out-alt"></i> Mes objets
+                </a></li>
               </ul>
             </div>
           </div>

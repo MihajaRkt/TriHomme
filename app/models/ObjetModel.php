@@ -24,4 +24,14 @@ class ObjetModel
         $stmt->execute();
         return $stmt ->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getMyObject($id_User){
+        $sql = "SELECT * FROM Objet JOIN Categorie 
+        ON Objet.id_Categorie = Categorie.id_Categorie 
+        WHERE id_Proprietaire = $id_User";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute();
+        return $stmt ->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
