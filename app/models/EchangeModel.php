@@ -20,7 +20,7 @@ class EchangeModel
             join User u1 on u1.id_User = ec.idEnvoyeur
             join Objet ob1 on ob1.id_Objet = ec.idObjetEnvoyeur
             join Objet ob2 on ob2.id_Objet = ec.idObjetReceveur
-            WHERE idReceveur = :id and status is NULL";
+            WHERE idReceveur = :id and Statut is NULL";
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':id' => $id_user]);
