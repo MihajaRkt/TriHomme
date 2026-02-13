@@ -48,15 +48,12 @@ $router->group('', function (Router $router) use ($app) {
     $router->get('/supprimerCategorie/@id', [$categorie, 'removeCategorie']);
 
     $gestionobjet = new GestionObjetController();
-    $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
-
-<<<<<<< Updated upstream
+    $router->get('/gestionob jet/@id', [$gestionobjet, 'afficherMesObjets']);
     $router->get('/ficheproduit/@id', [$gestionobjet, 'afficherFicheObjet']);
     $router->get('/addobjet', [$gestionobjet, 'afficherFormulaireAdd']);
-=======
+
     $echange= new EchangeController;
     $router->get('/echange/@idEnvoyeur/@idReceveur/@idObjetEchange', [$echange, 'proposerEchange']);
     
->>>>>>> Stashed changes
 
 }, [SecurityHeadersMiddleware::class]);
