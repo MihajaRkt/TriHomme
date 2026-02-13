@@ -1,5 +1,6 @@
 <?php
 
+use app\controllers\EchangeController;
 use app\middlewares\SecurityHeadersMiddleware;
 use flight\Engine;
 use flight\net\Router;
@@ -49,7 +50,10 @@ $router->group('', function (Router $router) use ($app) {
     $gestionobjet = new GestionObjetController();
     $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
 
-    $router->get('/ficheproduit/@id', [$gestionobjet, 'afficherFicheObjet']);
-    $router->get('/addobjet', [$gestionobjet, 'afficherFormulaireAdd']);
+    $echange = new EchangeController();
+    $router->get('/demandes/@id', [$echange, 'listeDemande']);
+    $router->get('/accepter-echange/@id', [$echange, 'accept']);
+    $router->get('/refuser-echange/@id', [$echange, 'reject']);
 
+    
 }, [SecurityHeadersMiddleware::class]);
