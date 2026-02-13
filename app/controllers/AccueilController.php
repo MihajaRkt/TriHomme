@@ -34,6 +34,13 @@ class AccueilController
                     'nombre_utilisateurs' => $nombreUtilisateurs,
                     'baseUrl' => Flight::get('flight.base_url'),
                 ]);
+            } else{
+                Flight::render('accueil', [
+                    'currentUser' => $user,
+                    'liste' => $objet,
+                    'users' => $users,
+                    'baseUrl' => Flight::get('flight.base_url'),
+                ]);
             }
         } else {
             Flight::render('accueil', [
