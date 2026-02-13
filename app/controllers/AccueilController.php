@@ -52,15 +52,17 @@ class AccueilController
         }
     }
 
-    public function autreProfil($id_profil){
+    public function autreProfil($id_user, $id_profil){
         $pdo = Flight::db();
         $usermodel = new UserModel($pdo);
         $user = $usermodel->getUserById($id_profil);
-        
+        $userme= $usermodel->getUserById($id_user);
+
         $objetmodel = new ObjetModel($pdo);
         $objets = $objetmodel->getAllObjetbyUser($id_profil); 
 
         Flight::render('frontoffice/autre-profil', [
+            'currentUser' => $userme,
             'user' => $user,
             'objets' => $objets,
             'baseUrl' => Flight::get('flight.base_url'),

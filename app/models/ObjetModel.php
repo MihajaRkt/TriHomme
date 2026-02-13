@@ -25,6 +25,18 @@ class ObjetModel
         return $stmt ->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getObjetbyId($idObjet)
+    {
+        $sql= "SELECT Objet.*, User.*, Categorie.*, Categorie.libelle as cat_lib, Objet.libelle as obj_lib
+        FROM Objet join User on Objet.id_proprietaire = User.id_User 
+        join Categorie on Categorie.id_categorie = Objet.id_categorie
+        where Objet.id_Objet = :objet";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute(['objet' => $idObjet]);
+        return $stmt ->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function getMyObject($id_User){
         $sql = "SELECT  Objet.libelle as libelle,
         Objet.prix as prix, Categorie.libelle as categorie, Objet.descriptions as descriptions,

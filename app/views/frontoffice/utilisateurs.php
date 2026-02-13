@@ -36,7 +36,11 @@ ob_start();
                                                 <span class="badge bg-warning text-dark">Administrateur</span>
                                             <?php endif; ?>
                                             <div class="mt-3">
+<<<<<<< Updated upstream
                                                 <a href="<?= $baseUrl ?>/profil/<?= $user['id_User'] ?>"
+=======
+                                                <a href="<?= $baseUrl ?>/profil/<?= $currentUser['id_User'] ?>/<?= $user['id_User'] ?>"
+>>>>>>> Stashed changes
                                                     class="btn btn-custom btn-sm">
                                                     <i class="fas fa-eye"></i> Voir Profil
                                                 </a>

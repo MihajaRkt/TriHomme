@@ -1,4 +1,5 @@
 <?php 
+session_start();
 ob_start();
 ?>
 
@@ -47,9 +48,10 @@ ob_start();
                             </span>
                         </td>
                         <td class="text-center">
-                            <button class="btn btn-outline-primary">
-                            Proposer un échange
-                            </button>
+                            <a href="<?= $baseUrl ?>/echange/<?= $currentUser['id_User'] ?>/<?= $user['id_User'] ?>/<?= $obj['id_Objet'] ?>" 
+                            class="btn btn-outline-primary">
+                                Proposer un échange
+                            </a>
                         </td>
                         </tr>
                     <?php endforeach; ?>

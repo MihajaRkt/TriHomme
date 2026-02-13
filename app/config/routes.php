@@ -8,6 +8,7 @@ use app\controllers\UserController;
 use app\controllers\AccueilController;
 use app\controllers\AuthController;
 use app\controllers\CategorieController;
+use app\controllers\EchangeController;
 use app\controllers\GestionObjetController;
 
 /** 
@@ -37,7 +38,7 @@ $router->group('', function (Router $router) use ($app) {
 
     $accueil = new AccueilController();
     $router->get('/accueil/@id', [$accueil, 'list']);
-    $router->get('/profil/@id', [$accueil, 'autreProfil']);
+    $router->get('/profil/@idEnvoyeur/@idReceveur', [$accueil, 'autreProfil']);
 
     $categorie = new CategorieController();
     $router->get('/redirectCategorie', [$categorie, 'redirectInsert']);
@@ -49,7 +50,13 @@ $router->group('', function (Router $router) use ($app) {
     $gestionobjet = new GestionObjetController();
     $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
 
+<<<<<<< Updated upstream
     $router->get('/ficheproduit/@id', [$gestionobjet, 'afficherFicheObjet']);
     $router->get('/addobjet', [$gestionobjet, 'afficherFormulaireAdd']);
+=======
+    $echange= new EchangeController;
+    $router->get('/echange/@idEnvoyeur/@idReceveur/@idObjetEchange', [$echange, 'proposerEchange']);
+    
+>>>>>>> Stashed changes
 
 }, [SecurityHeadersMiddleware::class]);
