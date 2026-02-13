@@ -26,16 +26,7 @@ ob_start();
         </h5>
       </div>
       <div class="card-body p-0">
-        <p>Objet detenu par : <strong><?= $main['nom_User'] ?></strong></p>
-        <p>Categorie : <strong><?= $main['categorie'] ?></strong></p>
-        <p>Prix : <strong><?= $main['prix'] ?>$</strong></p>
-        <p>Description : 
-            <?php if($main['descriptions']!=null){ ?>
-             <strong><?= $main['descriptions'] ?></strong> 
-             <?php }else{ ?>
-             <strong>Aucune description</strong>
-              <?php } ?>
-            </p>
+        
       </div>
     </div>
   </div>

@@ -11,7 +11,9 @@ class GestionObjetController
         $pdo = Flight::db();
         $objetmodel = new ObjetModel($pdo);
         $liste = $objetmodel->getMyObject($id_User);
-        Flight::render('frontoffice/gestion-objet', ['objets' => $liste]);
+        Flight::render('frontoffice/gestion-objet', 
+        ['objets' => $liste, 'id_User'=> $id_User,
+        'baseUrl' => Flight::get('flight.base_url')]);
     }
 
     public function afficherFicheObjet($id_Objet){
@@ -19,9 +21,12 @@ class GestionObjetController
         $objetmodel = new ObjetModel($pdo);
         $infoMain = $objetmodel->getMainInfoObjet($id_Objet);
         $infoFille = $objetmodel->getFilleInfoObjet($id_Objet);
-        Flight::render('frontoffice/fiche-produit', ['main' => $infoMain[0], 'fille' => $infoFille]);
+        Flight::render('frontoffice/fiche-produit', 
+        ['main' => $infoMain[0],
+         'fille' => $infoFille,
+         'baseUrl' => Flight::get('flight.base_url')]);
     }
     public function afficherFormulaireAdd(){
-        Flight::render('frontoffice/addform-objet');
+        Flight::render('frontoffice/addform-objet', ['baseUrl' => Flight::get('flight.base_url')]);
     }
 }

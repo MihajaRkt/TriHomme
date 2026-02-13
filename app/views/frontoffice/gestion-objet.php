@@ -99,7 +99,7 @@ ob_start();
 </div>
 <?php endif; ?>
 
-<a href="<?= $baseUrl ?>/addobjet">
+<a href="<?= $baseUrl ?>/addobjet/<?= $id_User ?>">
 <button class="btn btn-custom">
 Ajouter un produit
 </button>
