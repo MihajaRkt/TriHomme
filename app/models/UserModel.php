@@ -25,6 +25,7 @@ class UserModel
         }
         return false;
     }
+
     
     public function insert_user($username, $email, $mdp)
     {
