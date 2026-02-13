@@ -51,4 +51,20 @@ class AccueilController
             ]);
         }
     }
+
+    public function autreProfil($id_profil){
+        $pdo = Flight::db();
+        $usermodel = new UserModel($pdo);
+        $user = $usermodel->getUserById($id_profil);
+        
+        $objetmodel = new ObjetModel($pdo);
+        $objets = $objetmodel->getAllObjetbyUser($id_profil); 
+
+        Flight::render('frontoffice/autre-profil', [
+            'user' => $user,
+            'objets' => $objets,
+            'baseUrl' => Flight::get('flight.base_url'),
+        ]);
+    }
+
 }

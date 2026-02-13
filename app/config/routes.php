@@ -36,6 +36,7 @@ $router->group('', function (Router $router) use ($app) {
 
     $accueil = new AccueilController();
     $router->get('/accueil/@id', [$accueil, 'list']);
+    $router->get('/profil/@id', [$accueil, 'autreProfil']);
 
     $categorie = new CategorieController();
     $router->get('/redirectCategorie', [$categorie, 'redirectInsert']);

@@ -151,7 +151,11 @@ ob_start();
                      style="width: 50px; height: 50px;">
                   <i class="fas fa-user text-white"></i>
                 </div>
-                <div class="small fw-semibold"><?= htmlspecialchars($user['nom_User']) ?></div>
+
+                <a href="<?= htmlspecialchars($baseUrl . '/profil/' . $user['id_User']) ?>" class="small fw-semibold d-block">
+                  <?= htmlspecialchars($user['nom_User']) ?>
+                </a>
+                
                 <?php if (!empty($user['isAdmin'])): ?>
                   <span class="badge bg-warning text-dark">Admin</span>
                 <?php endif; ?>
