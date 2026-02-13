@@ -16,7 +16,11 @@ class ObjetModel
 
     public function getAllObjet()
     {
-        $stmt = $this->db->prepare("SELECT * FROM Objet");
+        $sql= "SELECT Objet.*, User.*, Categorie.*, Categorie.libelle as cat_lib, Objet.libelle as obj_lib
+        FROM Objet join User on Objet.id_proprietaire = User.id_User 
+        join Categorie on Categorie.id_categorie = Objet.id_categorie";
+
+        $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt ->fetchAll(PDO::FETCH_ASSOC);
     }

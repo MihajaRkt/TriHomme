@@ -1,6 +1,6 @@
 <?php
 if (!isset($baseUrl)) { $baseUrl = Flight::get('flight.base_url'); }
-if (!isset($page_title)) { $page_title = 'Accueil - TriHomme'; }
+if (!isset($page_title)) { $page_title = 'Accueil - Takalo-Takalo'; }
 $isLoggedIn = !empty($currentUser);
 ob_start();
 ?>
@@ -9,7 +9,7 @@ ob_start();
     <div class="text-center mb-4">
       <h1 class="display-5 fw-bold">
         <i class="fas fa-store text-primary me-3"></i>
-        Bienvenue sur TriHomme
+        Bienvenue sur Takalo-Takalo
       </h1>
       <p class="lead text-muted">Découvrez notre sélection de produits exceptionnels</p>
     </div>
@@ -81,15 +81,15 @@ ob_start();
                       <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3">
                         <i class="fas fa-user text-primary"></i>
                       </div>
-                      <span class="fw-semibold">ID: <?= htmlspecialchars($produit['id_Proprietaire']) ?></span>
+                      <span class="fw-semibold"> <?= htmlspecialchars($produit['nom_User']) ?></span>
                     </div>
                   </td>
                   <td>
                     <span class="badge bg-light text-dark fw-semibold px-3 py-2">
-                      Cat. <?= htmlspecialchars($produit['id_Categorie']) ?>
+                       <?= htmlspecialchars($produit['cat_lib']) ?>
                     </span>
                   </td>
-                  <td class="fw-semibold"><?= htmlspecialchars($produit['libelle']) ?></td>
+                  <td class="fw-semibold"><?= htmlspecialchars($produit['obj_lib']) ?></td>
                   <td>
                     <span class="fw-bold text-success fs-6">
                       <?= number_format($produit['prix'], 0, ',', ' ') ?> €
@@ -139,7 +139,7 @@ ob_start();
       <div class="card-header-custom">
         <h6 class="mb-0">
           <i class="fas fa-users me-2"></i>
-          Communauté TriHomme
+          Communauté Takalo-Takalo
         </h6>
       </div>
       <div class="card-body">
