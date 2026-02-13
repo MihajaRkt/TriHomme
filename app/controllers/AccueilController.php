@@ -22,17 +22,19 @@ class AccueilController
         $users = $usermodel->getAllUsers();
         // $currentUser = $_SESSION['user'] ?? null;
 
-        if ($user['id_User'] == $admin[0]['id_User']) {
-            $categorie = new CategorieModel($pdo);
-            $categories = $categorie->getNumberCategories();
-            $nombreUtilisateurs = count($users);
+        if($admin != NULL){
+            if ($user['id_User'] == $admin[0]['id_User']) {
+                $categorie = new CategorieModel($pdo);
+                $categories = $categorie->getNumberCategories();
+                $nombreUtilisateurs = count($users);
 
-            Flight::render('backoffice-categorie', [
-                'currentUser' => $user,
-                'liste_categorie' => $categories,
-                'nombre_utilisateurs' => $nombreUtilisateurs,
-                'baseUrl' => Flight::get('flight.base_url'),
-            ]);
+                Flight::render('backoffice-categorie', [
+                    'currentUser' => $user,
+                    'liste_categorie' => $categories,
+                    'nombre_utilisateurs' => $nombreUtilisateurs,
+                    'baseUrl' => Flight::get('flight.base_url'),
+                ]);
+            }
         } else {
             Flight::render('accueil', [
                 'currentUser' => $user,

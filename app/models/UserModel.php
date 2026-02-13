@@ -20,7 +20,7 @@ class UserModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute([':email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user && $user['pwd_User'] === $mdp) {
+        if ($user && password_verify($mdp, $user['pwd_User'])) {
             return $user;
         }
         return false;
