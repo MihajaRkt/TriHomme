@@ -223,7 +223,7 @@ $isAdmin = !empty($isAdminUser ?? false);
       <?php if ($isLoggedIn): ?>
         <nav class="navbar-custom d-flex justify-content-between align-items-center">
           <a class="brand" href="<?= $baseUrl ?>">
-            <i class="fas fa-store"></i>TriHomme
+            <i class="fas fa-store"></i>Takalo-Takalo
           </a>
           <div class="d-flex align-items-center gap-3">
             <?php if ($isAdmin): ?>
@@ -252,7 +252,7 @@ $isAdmin = !empty($isAdminUser ?? false);
       <?php else: ?>
         <nav class="navbar-custom d-flex justify-content-between align-items-center">
           <a class="brand" href="<?= $baseUrl ?>">
-            <i class="fas fa-store"></i>TriHomme
+            <i class="fas fa-store"></i>Takalo-Takalo
           </a>
           <div class="d-flex gap-3">
             <a href="<?= $baseUrl ?>" class="nav-link-custom">

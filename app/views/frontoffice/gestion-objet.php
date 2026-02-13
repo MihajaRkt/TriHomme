@@ -50,12 +50,12 @@ ob_start();
                 <tr>
                   <td>
                     <span class="badge bg-light text-dark fw-semibold px-3 py-2">
-                       <?= $o['libelle'] ?>
+                       <?= $o['categorie'] ?>
                     </span>
                   </td>
                   <?php 
-                  if($o['descriptions']!= null){ ?>
-                  <td class="fw-semibold"><?= htmlspecialchars($o['descriptions']) ?></td>
+                  if($o['libelle']!= null){ ?>
+                  <td class="fw-semibold"><?= htmlspecialchars($o['libelle']) ?></td>
                   <td>
                   <?php }else{ ?>
                   <td class="fw-semibold">Pas encore de description</td>
@@ -68,7 +68,7 @@ ob_start();
                   <td class="text-center">
                     <div class="btn-group btn-group-sm">
                       <button class="btn btn-outline-primary" title="Voir détails">
-                        <a href="<?= $baseUrl ?>/">Fiche-produit</a>
+                        <a href="<?= $baseUrl ?>/ficheproduit/<?= $o['id_Objet'] ?>">Fiche-produit</a>
                       </button>
                     </div>
                   </td>
@@ -98,6 +98,12 @@ ob_start();
   </div>
 </div>
 <?php endif; ?>
+
+<a href="<?= $baseUrl ?>/addobjet">
+<button class="btn btn-custom">
+Ajouter un produit
+</button>
+</a>
 
 <?php
 $content = ob_get_clean();

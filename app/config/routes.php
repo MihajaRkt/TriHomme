@@ -48,4 +48,7 @@ $router->group('', function (Router $router) use ($app) {
     $gestionobjet = new GestionObjetController();
     $router->get('/gestionobjet/@id', [$gestionobjet, 'afficherMesObjets']);
 
+    $router->get('/ficheproduit/@id', [$gestionobjet, 'afficherFicheObjet']);
+    $router->get('/addobjet', [$gestionobjet, 'afficherFormulaireAdd']);
+
 }, [SecurityHeadersMiddleware::class]);
