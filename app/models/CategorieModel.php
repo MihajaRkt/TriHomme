@@ -59,7 +59,7 @@ class CategorieModel
             $val = $stmt->fetch(PDO::FETCH_ASSOC);
             $result[] = [
                 'id_categorie' => $c['id_Categorie'],
-                'nom' => $val['nom_categorie'],
+                'nom' => $c['libelle'],
                 'nombre' => $val['nombre'],
             ];
         }

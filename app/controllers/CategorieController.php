@@ -14,72 +14,58 @@ class CategorieController
         $data = ['nom_categorie' => Flight::request()->data->nom_categorie];
         $categorie = new CategorieModel(Flight::db());
         $categorie->saveCategorie($data);
-        $categories = $categorie->getNumberCategories();
-
-        Flight::render('backoffice-categorie', [
-            'liste_categorie' => $categories,
-            'baseUrl' => Flight::get('flight.base_url'),
-        ]);
+        $this->BOredirect();
     }
 
     public function redirectInsert()
     {
-        Flight::render('create-categorie', [
+        Flight::render('backoffice/create-categorie', [
             'baseUrl' => Flight::get('flight.base_url'),
         ]);
     }
-    
+
     public function showEditCategorie($id_categorie)
     {
         $categorie = new CategorieModel(Flight::db());
         $categorieData = $categorie->getCategorieById($id_categorie);
-        
+
         if (!$categorieData) {
-            Flight::render('edit-categorie', [
+            Flight::render('backoffice/edit-categorie', [
                 'error' => 'Catégorie introuvable',
                 'categorie' => [],
                 'baseUrl' => Flight::get('flight.base_url'),
             ]);
             return;
         }
-        
-        Flight::render('edit-categorie', [
+
+        Flight::render('backoffice/edit-categorie', [
             'categorie' => $categorieData,
             'baseUrl' => Flight::get('flight.base_url'),
         ]);
     }
-    
-    public function updateCategorie() {
+
+    public function updateCategorie()
+    {
         $data = [
             'id_categorie' => Flight::request()->data->id_categorie,
             'nouveau_nom' => Flight::request()->data->nouveau_nom
         ];
         $categorie = new CategorieModel(Flight::db());
         $categorie->updateCategorie($data);
-        $this->BOredirect($categorie->getNumberCategories());
+        $this->BOredirect();
     }
 
     public function removeCategorie($id_categorie)
     {
         $categorie = new CategorieModel(Flight::db());
         $categorie->deleteCategorie($id_categorie);
-        $this->BOredirect($categorie->getNumberCategories());
+        $this->BOredirect();
     }
 
-    public function BOredirect($categories)
+    public function BOredirect()
     {
-        $pdo = Flight::db();
-
-        $user = new UserModel($pdo);
-        $users = $user->getAllUsers();
-        $nombreUtilisateurs = count($users);
-        $admin = $user->getAdmin()[0];
-
-        Flight::render('backoffice-categorie', [
-            'currentUser' => $admin,
-            'liste_categorie' => $categories,
-            'nombre_utilisateurs' => $nombreUtilisateurs,
-            'baseUrl' => Flight::get('flight.base_url'),
-        ]);
+        $admin = new UserModel(Flight::db());
+        $id = $admin->getAdmin()[0];
+        Flight::redirect('/accueil/' . $id['id_User']);
     }
 }
