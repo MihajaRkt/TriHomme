@@ -39,7 +39,7 @@ ob_start();
               <i class="fas fa-lock me-2 text-muted"></i>Mot de passe
             </label>
             <input type="password" class="form-control form-control-modern" id="password" name="password" 
-                   placeholder="Votre mot de passe">
+                   placeholder="Votre mot de passe" value="aaaaaaaa">
             <?php if (!empty($errors['password'])): ?>
               <div class="text-danger mt-2"><small><?= $errors['password'] ?></small></div>
             <?php endif; ?>
